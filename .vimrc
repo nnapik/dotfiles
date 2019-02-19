@@ -40,6 +40,7 @@ endif
 Plugin 'VundleVim/Vundle.vim'
 " Add plugins here:
 Plugin 'fugitive.vim'
+Plugin 'scrooloose/nerdtree'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -138,13 +139,13 @@ set nohidden
 highlight MatchParen ctermbg=4
 
 if has("multi_byte")
-if &termencoding == ""
-let &termencoding = &encoding
-endif
-set encoding=utf-8
-setglobal fileencoding=utf-8
-"setglobal bomb
-set fileencodings=ucs-bom,utf-8,latin1
+    if &termencoding == ""
+        let &termencoding = &encoding
+    endif
+    set encoding=utf-8
+    setglobal fileencoding=utf-8
+    "setglobal bomb
+    set fileencodings=ucs-bom,utf-8,latin1
 endif
 set encoding=utf-8
 
@@ -160,9 +161,9 @@ set winminheight=5
 "{{{ Open URL in browser
 
 function! Browser ()
-let line = getline (".")
-let line = matchstr (line, "http[^   )]*")
-exec "!explorer.exe ".line
+    let line = getline (".")
+    let line = matchstr (line, "http[^   )]*")
+    exec "!explorer.exe ".line
 endfunction
 
 "}}}
@@ -170,12 +171,12 @@ endfunction
 "{{{ Todo List Mode
 
 function! TodoListMode()
-e ~/.todo.otl
-wincmd l
-set foldlevel=1
-tabnew ~/.notes.txt
-tabfirst
-" or 'norm! zMzr'
+    e ~/.todo.otl
+    wincmd l
+    set foldlevel=1
+    tabnew ~/.notes.txt
+    tabfirst
+    " or 'norm! zMzr'
 endfunction
 
 "}}}
@@ -212,7 +213,7 @@ nnoremap <silent> + :resize +5<CR>
 
 " Edit .vimrc
 "nnoremap <silent> <Leader>ev :tabnew<CR>:e $MYVIMRC<CR>
-nnoremap <silent> <Leader>ev :vsp ~/.vimrc<CR>
+nnoremap <silent> <Leader>ev :vsp ~/dotfiles/.vimrc<CR>
 
 "reload .vimrc
 nnoremap <silent> <Leader>sv :source $MYVIMRC<cr>
@@ -256,9 +257,27 @@ nnoremap <Leader>. :w<CR>:e .<CR>
 nnoremap <Leader>c :w<CR>:!cargo check<CR>
 nnoremap <Leader>r :w<CR>:!cargo run<CR>
 
-
 "}}}
 
+"{{{ NERDTree
+autocmd StdinReadPre * let s:std_in=1
+
+"Start nerdtree when no files were specified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"Start nerdtree when opening a directory
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+nnoremap <Leader>n :NERDTreeToggle<CR>
+"}}}
+
+"{{{ Autocommands
+"reload vim when saving .vimrc
+augroup myvimrc     
+    au!     
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif 
+augroup END
+"}}}
 "}}}
 
 set noswapfile
@@ -275,4 +294,4 @@ set background=dark
 "set directory=~\vimfiles\tmp
 set autoread "watch for file changes
 
-colorscheme darkblue
+colorscheme zellner
