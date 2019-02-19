@@ -41,6 +41,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Add plugins here:
 Plugin 'fugitive.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'vim-airline/vim-airline'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -50,7 +51,18 @@ endif
 call vundle#end()
 filetype plugin indent on
 "}}}
+"{{{ NERDTree
+autocmd StdinReadPre * let s:std_in=1
 
+"Start nerdtree when no files were specified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"Start nerdtree when opening a directory
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+let NERDTreeShowHidden=1
+
+"}}}
 "{{{Misc Settings
 
 " Necesary  for lots of cool vim things
@@ -156,7 +168,6 @@ set winminheight=5
 
 
 " }}}
-
 "{{{ Functions
 "{{{ Open URL in browser
 
@@ -182,7 +193,13 @@ endfunction
 "}}}
 
 "}}}
-
+"{{{ Autocommands
+"reload vim when saving .vimrc
+augroup myvimrc     
+    au!     
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif 
+augroup END
+"}}}
 "{{{ Mappings
 
 "{{{ Vanilla
@@ -260,23 +277,7 @@ nnoremap <Leader>r :w<CR>:!cargo run<CR>
 "}}}
 
 "{{{ NERDTree
-autocmd StdinReadPre * let s:std_in=1
-
-"Start nerdtree when no files were specified
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-"Start nerdtree when opening a directory
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
 nnoremap <Leader>n :NERDTreeToggle<CR>
-"}}}
-
-"{{{ Autocommands
-"reload vim when saving .vimrc
-augroup myvimrc     
-    au!     
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif 
-augroup END
 "}}}
 "}}}
 
