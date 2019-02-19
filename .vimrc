@@ -42,7 +42,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'fugitive.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
+Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
+Plugin 'airblade/vim-gitgutter'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -228,8 +230,8 @@ nnoremap <silent> <C-L> <C-W><C-L>
 nnoremap <silent> <C-H> <C-W><C-H>
 nnoremap <silent> <C-,> :vertical resize -5<CR>
 nnoremap <silent> <C-.> :vertical resize +5<CR>
-nnoremap <silent> - :resize -5<CR>
-nnoremap <silent> + :resize +5<CR>
+nnoremap <silent> <C--> :resize -5<CR>
+nnoremap <silent> <C-+> :resize +5<CR>
 
 " Edit .vimrc
 "nnoremap <silent> <Leader>ev :tabnew<CR>:e $MYVIMRC<CR>
