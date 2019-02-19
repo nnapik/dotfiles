@@ -42,6 +42,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'fugitive.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
+Plugin 'scrooloose/syntastic'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -50,6 +51,8 @@ if iCanHazVundle == 0
 endif
 call vundle#end()
 filetype plugin indent on
+"}}}
+"{{{ Syntastic
 "}}}
 "{{{ NERDTree
 autocmd StdinReadPre * let s:std_in=1
