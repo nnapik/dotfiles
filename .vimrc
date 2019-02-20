@@ -229,6 +229,9 @@ augroup END
 "change leader to ,
 :let mapleader = ","
 
+"jk to leav insert mode
+inoremap jk <Esc>
+
 " save and closes a file with a leader
 nnoremap <silent> <Leader>x :wq<CR>
 nnoremap <silent> <Leader>w :w<CR>
