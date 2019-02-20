@@ -44,9 +44,9 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'Solarized'
 Plugin 'kien/ctrlp.vim'
+Plugin 'valloric/youcompleteme'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -57,6 +57,9 @@ call vundle#end()
 filetype plugin indent on
 "}}}
 "{{{ CtrlP
+"
+"}}}
+"{{{ You complete me <3
 "
 "}}}
 "{{{ Syntastic
