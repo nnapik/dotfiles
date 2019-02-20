@@ -46,6 +46,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Solarized'
+Plugin 'kien/ctrlp.vim'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -54,6 +55,9 @@ if iCanHazVundle == 0
 endif
 call vundle#end()
 filetype plugin indent on
+"}}}
+"{{{ CtrlP
+"
 "}}}
 "{{{ Syntastic
 set statusline+=%#warningmsg# 
