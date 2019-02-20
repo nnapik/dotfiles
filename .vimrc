@@ -45,7 +45,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -302,4 +301,4 @@ set background=dark
 set autoread "watch for file changes
 
 let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme darkblue
