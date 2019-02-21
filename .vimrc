@@ -63,7 +63,9 @@ filetype plugin indent on
 "
 "}}}
 "{{{ You complete me <3
-"
+if g:os == 'Win'
+    let g:ycm_server_python_interpreter = 'c:\Python27amd64\python.exe'
+endif
 "}}}
 "{{{ Syntastic
 set statusline+=%#warningmsg# 
