@@ -88,6 +88,8 @@ let NERDTreeShowHidden=1
 "}}}
 "{{{Misc Settings
 
+"turn the bell off
+set visualbell
 " Necesary  for lots of cool vim things
 set nocompatible
 "
