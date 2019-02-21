@@ -47,6 +47,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Solarized'
 Plugin 'kien/ctrlp.vim'
 Plugin 'valloric/youcompleteme'
+Plugin 'ervandew/supertab'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
