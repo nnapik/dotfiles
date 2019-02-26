@@ -237,6 +237,7 @@ inoremap jk <Esc>
 " save and closes a file with a leader
 nnoremap <silent> <Leader>x :wq<CR>
 nnoremap <silent> <Leader>w :w<CR>
+nnoremap <silent> <Leader>q :q<CR>
 
 " Open Url on this line with the browser \w
 map <Leader>f :call Browser ()<CR>
