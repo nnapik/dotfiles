@@ -14,3 +14,8 @@ alias gs='g status'
 alias gd='g diff'
 
 alias vali='vim ~/.bash_aliases'
+
+alias t='tmux'
+alias ta='t attach -t'
+alias tls='t list-sessions'
+alias tn='t new-session -s'
