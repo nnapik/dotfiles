@@ -1,0 +1,17 @@
+[user]
+	name = Petr Nedoma
+	email = nnapik@gmail.com
+[core]
+    editor = "vim"
+    excludesfile = ~/.gitignore
+[url "https://github"]
+	insteadOf = git://github
+[fetch]
+	prune = true
+[push]
+        default = simple
+[rebase] 
+        autosquash = true
+[log]     
+        decorate = true     
+        pretty = oneline
