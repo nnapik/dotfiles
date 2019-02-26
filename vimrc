@@ -44,9 +44,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
-Plugin 'Solarized'
 Plugin 'kien/ctrlp.vim'
-"Plugin 'valloric/youcompleteme'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -92,7 +90,6 @@ let NERDTreeShowHidden=1
 set visualbell
 " Necesary  for lots of cool vim things
 set nocompatible
-"
 "Automatically cd into the directory that the file is in:"
 set autochdir
 
@@ -323,5 +320,4 @@ set background=dark
 "set directory=~\vimfiles\tmp
 set autoread "watch for file changes
 
-let g:solarized_termcolors=256
 colorscheme desert
