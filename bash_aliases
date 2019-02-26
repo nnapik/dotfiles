@@ -5,3 +5,5 @@ alias mkdir='mkdir -pv'
 
 alias grep='grep --color=auto'
 alias ..='cd ..'
+
+alias uu='sudo apt update && sudo apt upgrade'
