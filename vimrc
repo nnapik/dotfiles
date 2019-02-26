@@ -44,9 +44,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
-Plugin 'Solarized'
 Plugin 'kien/ctrlp.vim'
-Plugin 'valloric/youcompleteme'
 Plugin 'ervandew/supertab'
 
 if iCanHazVundle == 0
@@ -95,7 +93,6 @@ let NERDTreeShowHidden=1
 set visualbell
 " Necesary  for lots of cool vim things
 set nocompatible
-"
 "Automatically cd into the directory that the file is in:"
 set autochdir
 
@@ -314,7 +311,11 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 
 set noswapfile
 set guifont=Lucida_Console:h11
-set fileformats=dos,unix
+if g:os == 'Win'
+    set fileformats=dos,unix
+else
+    set fileformats=unix,dos
+endif
 
 set scrolloff=10 "allways view at least 5 lines up/down from the cursor
 set previewheight=5
@@ -326,9 +327,4 @@ set background=dark
 "set directory=~\vimfiles\tmp
 set autoread "watch for file changes
 
-let g:solarized_termcolors=256
-if g:os == 'Win' 
-    colorscheme darkblue
-else
-    colorscheme solarized
-endif   
+colorscheme desert
