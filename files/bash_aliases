@@ -12,3 +12,5 @@ alias g='git'
 alias gc='g commit'
 alias gs='g status'
 alias gd='g diff'
+
+alias vali='vim ~/.bash_aliases'

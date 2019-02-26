@@ -141,7 +141,7 @@ if ! [ -d "${DOTFILES_FOLDER}" ]; then
 fi
 
 print_info "Linking dotfiles"
-rcup -d "${DOTFILES_FOLDER}"
+rcup -d "${DOTFILES_FOLDER}/files"
 print_success "dotfiles installed"
 
 print_success "All done! Visit https://github.com/nnapik/dotfiles for the full source & related configs."
