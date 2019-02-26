@@ -46,7 +46,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'Solarized'
 Plugin 'kien/ctrlp.vim'
-Plugin 'valloric/youcompleteme'
+"Plugin 'valloric/youcompleteme'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -324,8 +324,4 @@ set background=dark
 set autoread "watch for file changes
 
 let g:solarized_termcolors=256
-if g:os == 'Win' 
-    colorscheme darkblue
-else
-    colorscheme solarized
-endif   
+colorscheme desert
