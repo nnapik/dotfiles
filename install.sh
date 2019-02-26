@@ -2,6 +2,7 @@
 # sets up a linux and/or WSL based dev-env
 # inspired by elithrar/dotfiles
 DOTFILES_REPO="https://github.com/nnapik/dotfiles"
+DOTFILES_FOLDER="~/.dotfiles"
 APT_PACKAGES="git htop vim python youtube-dl zsh"
 SSH_EMAIL="nnapik@gmail.com"
 
@@ -21,7 +22,8 @@ print_info() {
     printf "${blue}🛈 info:${reset} %b\n" "$1"
 }
 
-echo $PATH
-ln -sf $PATH/vimrc ~/.vimrc
-ln -sf $PATH/bashrc ~/.bashrc
-ln -sf $PATH/bash_aliases ~/.bash_aliases
+PWD=$(pwd)
+echo $PWD
+ln -sf $PWD/vimrc ~/.vimrc
+ln -sf $PWD/bashrc ~/.bashrc
+ln -sf $PWD/bash_aliases ~/.bash_aliases
