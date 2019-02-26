@@ -51,6 +51,7 @@ Running...
 - Sets up a Linux or macOS based development machine.
 - Safe to run repeatedly (checks for existing installs)
 - Repository at https://github.com/nnapik/dotfiles
+- installing files to $HOME
 - Fork as needed
 - Deeply inspired by https://github.com/elithrar/dotfiles
 -----
@@ -81,8 +82,6 @@ fi
 
 # Ask for sudo
 sudo -v &> /dev/null
-
-
 
 # Update the system & install core dependencies
 if [ "$OS" = "Linux" ] && [ "$DISTRO" = "Debian" ]; then
@@ -152,13 +151,13 @@ if ! [ -x "$(command -v rcup)" ]; then
     brew install rcm
 fi
 
-if ! [ -d "${DOTFILES_FOLDER}"]; then
+if ! [ -d "${DOTFILES_FOLDER}" ]; then
     print_info "Cloning dotfiles"
-    git clone ${DOTFILES_REPO} "${DOTFILES_FOLDER}"
+    git clone ${DOTFILES_REPO} ${DOTFILES_FOLDER}
 fi
 
 print_info "Linking dotfiles"
 rcup -d "${DOTFILES_FOLDER}"
 print_success "dotfiles installed"
 
-print_success "All done! Visit https://github.com/elithrar/dotfiles for the full source & related configs."
+print_success "All done! Visit https://github.com/nnapik/dotfiles for the full source & related configs."
