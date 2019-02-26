@@ -308,7 +308,11 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 
 set noswapfile
 set guifont=Lucida_Console:h11
-set fileformats=dos,unix
+if g:os == 'Win'
+    set fileformats=dos,unix
+else
+    set fileformats=unix,dos
+endif
 
 set scrolloff=10 "allways view at least 5 lines up/down from the cursor
 set previewheight=5
