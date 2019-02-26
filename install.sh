@@ -108,6 +108,7 @@ if ! [ -x "$(command -v brew)" ]; then
         print_info "Installing Linuxbrew..."
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
         test -d ~/.linuxbrew && export PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
+        test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
         print_success "Linuxbrew installed"
     elif [ "$OS_ENV" = "macOS" ]; then
         print_info "Installing Homebrew..."
