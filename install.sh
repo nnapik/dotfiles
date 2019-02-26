@@ -95,11 +95,11 @@ else
 fi
 
 # Generate an SSH key (if none)
-if ! [[ -f "$HOME/.ssh/id_ed25519" ]]; then
-    printf "🔑 Generating new SSH key"
-    ssh-keygen -t ed25519 -f $HOME/.ssh/id_ed25519 -C "matt@eatsleeprepeat.net"
-    print "Key generated!"
-fi
+#if ! [[ -f "$HOME/.ssh/id_ed25519" ]]; then
+#    printf "🔑 Generating new SSH key"
+#    ssh-keygen -t ed25519 -f $HOME/.ssh/id_ed25519 -C "matt@eatsleeprepeat.net"
+#    print "Key generated!"
+#fi
 
 # Install Homebrew
 if ! [ -x "$(command -v brew)" ]; then
