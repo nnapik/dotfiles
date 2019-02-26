@@ -90,3 +90,19 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Linux specific
+if [ "$(uname -s 2> /dev/null)" = "Linux" ]; then
+    # Linuxbrew
+    test -d ~/.linuxbrew && PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
+    test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+
+    # WSL specific
+    if [ ! -z "$USERPROFILE" ]; then
+        cdpath+=(
+        $USERPROFILE/Dropbox
+        $USERPROFILE/Downloads
+        )
+
+        GOPATH=$USERPROFILE/go
+    fi
+fi
