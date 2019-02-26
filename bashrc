@@ -39,3 +39,7 @@ if [ "$(uname -s 2> /dev/null)" = "Linux" ]; then
         GOPATH=$USERPROFILE/go
     fi
 fi
+
+if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
+    tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+fi
