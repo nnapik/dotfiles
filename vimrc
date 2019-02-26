@@ -298,6 +298,9 @@ nnoremap <Leader>= gg=G''
 "save file and open current directory
 nnoremap <Leader>. :w<CR>:e .<CR>
 
+"press enter
+nnoremap <Leader><CR> i<CR><Esc>
+
 "compile rust
 nnoremap <Leader>c :w<CR>:!cargo check<CR>
 nnoremap <Leader>r :w<CR>:!cargo run<CR>
