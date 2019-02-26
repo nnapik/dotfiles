@@ -93,13 +93,6 @@ else
     print_info "Skipping system package updates"
 fi
 
-# Generate an SSH key (if none)
-if ! [[ -f "$HOME/.ssh/id_ed25519" ]]; then
-    printf "🔑 Generating new SSH key"
-    ssh-keygen -t ed25519 -f $HOME/.ssh/id_ed25519 -C "matt@eatsleeprepeat.net"
-    print "Key generated!"
-fi
-
 # Install Homebrew
 if ! [ -x "$(command -v brew)" ]; then
     if [ "${OS}" = "Linux" ]; then
@@ -107,6 +100,7 @@ if ! [ -x "$(command -v brew)" ]; then
         print_info "Installing Linuxbrew..."
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
         test -d ~/.linuxbrew && export PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
+        test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
         print_success "Linuxbrew installed"
     elif [ "$OS_ENV" = "macOS" ]; then
         print_info "Installing Homebrew..."
