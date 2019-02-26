@@ -258,7 +258,7 @@ nnoremap <silent> <C-+> :resize +5<CR>
 
 " Edit .vimrc
 "nnoremap <silent> <Leader>ev :tabnew<CR>:e $MYVIMRC<CR>
-nnoremap <silent> <Leader>ev :vsp ~/dotfiles/.vimrc<CR>
+nnoremap <silent> <Leader>ev :vsp $MYVIMRC<CR>
 
 "reload .vimrc
 nnoremap <silent> <Leader>sv :source $MYVIMRC<cr>
