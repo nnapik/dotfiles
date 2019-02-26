@@ -126,16 +126,6 @@ for pkg in "${BREW_PACKAGES[@]}"; do
 done
 print_success "Homebrew packages installed"
 
-# --- Configure zsh
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    print_info "Installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    command -v zsh | sudo tee -a /etc/shells
-    chsh -s $(which zsh)
-else
-    print_success "oh-my-zsh already installed"
-fi
-
 # --- dotfiles
 # Clone & install dotfiles
 print_info "Configuring dotfiles"
