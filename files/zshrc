@@ -1,6 +1,6 @@
 cd
 # source .profile
-#[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/petr/.oh-my-zsh
