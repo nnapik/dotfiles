@@ -20,3 +20,5 @@ alias t='tmux'
 alias ta='t attach -t'
 alias tls='t list-sessions'
 alias tn='t new-session -s'
+
+alias ezsh='exec zsh'
