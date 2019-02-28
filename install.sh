@@ -93,55 +93,17 @@ else
     print_info "Skipping system package updates"
 fi
 
-# Install Homebrew
-if ! [ -x "$(command -v brew)" ]; then
-    if [ "${OS}" = "Linux" ]; then
-        # Install Linuxbrew - http://linuxbrew.sh/
-        print_info "Installing Linuxbrew..."
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-        test -d ~/.linuxbrew && export PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
-        test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
-        print_success "Linuxbrew installed"
-    elif [ "$OS_ENV" = "macOS" ]; then
-        print_info "Installing Homebrew..."
-        curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
-        export PATH="/usr/local/bin:$PATH"
-        print_success "Homebrew installed"
-    fi
-else
-    print_success "Homebrew/Linuxbrew already installed."
-fi
-
-# --- Homebrew
-print_info "Installing Homebrew packages"
-for pkg in "${BREW_PACKAGES[@]}"; do
-    # Check if $pkg is already installed
-    print_info "Checking package $pkg"
-    if test ! $(brew list | grep $pkg); then
-        print_info "Installing $pkg"
-        brew install $pkg
-    else 
-        print_success "$pkg already installed"
-    fi
-done
-print_success "Homebrew packages installed"
-
-# --- dotfiles
-# Clone & install dotfiles
-print_info "Configuring dotfiles"
-if ! [ -x "$(command -v rcup)" ]; then
-    # Install rcup
-    brew tap thoughtbot/formulae
-    brew install rcm
-fi
-
 if ! [ -d "${DOTFILES_FOLDER}" ]; then
     print_info "Cloning dotfiles"
     git clone ${DOTFILES_REPO} ${DOTFILES_FOLDER}
 fi
 
 print_info "Linking dotfiles"
-rcup -d "${DOTFILES_FOLDER}/files"
+for f in ${DOTFILES_FOLDER}/files/*; do
+    print_info "linking: $f"
+    ln -fs $f ~/.$(basename -- $f)
+done
+#rcup -d "${DOTFILES_FOLDER}/files"
 print_success "dotfiles installed"
 
 print_success "All done! Visit https://github.com/nnapik/dotfiles for the full source & related configs."
