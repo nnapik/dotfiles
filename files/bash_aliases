@@ -14,8 +14,11 @@ alias gs='g status'
 alias gd='g diff'
 
 alias vali='vim ~/.bash_aliases'
+alias vth='vim $ZSH_CUSTOM/themes/hellmen.zsh-theme'
 
 alias t='tmux'
 alias ta='t attach -t'
 alias tls='t list-sessions'
 alias tn='t new-session -s'
+
+alias ezsh='exec zsh'
