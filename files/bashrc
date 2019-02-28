@@ -19,10 +19,6 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # Linux specific
 if [ "$(uname -s 2> /dev/null)" = "Linux" ]; then
     # Linuxbrew
@@ -39,7 +35,4 @@ if [ "$(uname -s 2> /dev/null)" = "Linux" ]; then
         GOPATH=$USERPROFILE/go
     fi
 fi
-
-if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
-    tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
-fi
+exec zsh
