@@ -88,7 +88,7 @@ if [ "$OS" = "Linux" ] && [ "$DISTRO" = "Debian" ]; then
     print_info "Updating system packages"
     sudo apt-get update
     sudo apt-get -y upgrade
-    sudo apt-get -y install build-essential curl file git $(APT_PACKAGES)
+    sudo apt-get -y install build-essential curl file git $APT_PACKAGES
 else
     print_info "Skipping system package updates"
 fi
