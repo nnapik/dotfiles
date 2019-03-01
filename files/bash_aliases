@@ -7,6 +7,7 @@ alias grep='grep --color=auto'
 alias ..='cd ..'
 
 alias uu='sudo apt update && sudo apt upgrade'
+alias ai='sudo apt install'
 
 alias g='git'
 alias gc='g commit'
