@@ -20,21 +20,4 @@ HISTFILESIZE=2000
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# Linux specific
-if [ "$(uname -s 2> /dev/null)" = "Linux" ]; then
-    # Linuxbrew
-    test -d ~/.linuxbrew && PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
-    test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
-
-    # WSL specific
-    if [ ! -z "$USERPROFILE" ]; then
-        cdpath+=(
-        $USERPROFILE/Dropbox
-        $USERPROFILE/Downloads
-        )
-
-        GOPATH=$USERPROFILE/go
-    fi
-fi
 exec zsh
