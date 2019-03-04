@@ -1,34 +1,59 @@
-# Put your custom themes in this folder.
-# Example:
 
-# af-magic.zsh-theme
-# Repo: https://github.com/andyfleming/oh-my-zsh
-# Direct Link: https://github.com/andyfleming/oh-my-zsh/blob/master/themes/af-magic.zsh-theme
+#!/usr/bin/env zsh
 
-if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+# ------------------------------------------------------------------------------
+#
+# Aphrodite Terminal Theme
+#
+# Author: Sergei Kolesnikov
+# https://github.com/win0err/aphrodite-terminal-theme
+#
+# ------------------------------------------------------------------------------
 
-# primary prompt
-PROMPT='$FG[237]------------------------------------------------------------%{$reset_color%}
-$FG[032]%~\
-$(git_prompt_info) \
-$FG[105]%(!.#.»)%{$reset_color%} '
-PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
-RPS1='${return_code}'
-
-# color vars
-eval my_gray='$FG[237]'
-eval my_orange='$FG[214]'
-
-# right prompt
-if type "virtualenv_prompt_info" > /dev/null
-then
-        RPROMPT='$(virtualenv_prompt_info)$my_gray%n@%m%{$reset_color%}%'
-else
-        RPROMPT='$my_gray%n@%m%{$reset_color%}%'
-fi
-# git settings
-ZSH_THEME_GIT_PROMPT_PREFIX="$FG[075]($FG[078]"
+ZSH_THEME_GIT_PROMPT_PREFIX=" %F{10}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
+ZSH_THEME_GIT_PROMPT_DIRTY="%f%F{11}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="$my_orange*%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
+
+aphrodite_get_welcome_symbol() {
+
+	echo -n "%(?..%F{1})"
+	
+	local welcome_symbol='$'
+	[ $EUID -ne 0 ] || welcome_symbol='#'
+	
+	echo -n $welcome_symbol
+	echo -n "%(?..%f)"
+}
+
+# local aphrodite_get_time="%F{grey}[%*]%f"
+
+aphrodite_get_current_branch() {
+
+	local branch=$(git_current_branch)
+	
+	if [ -n "$branch" ]; then
+		echo -n $ZSH_THEME_GIT_PROMPT_PREFIX
+		echo -n $(parse_git_dirty)
+		echo -n "‹${branch}›"
+		echo -n $ZSH_THEME_GIT_PROMPT_SUFFIX
+	fi
+}
+
+aphrodite_get_prompt() {
+
+	# 256-colors check (will be used later): tput colors
+	
+	echo -n "%F{6}%n%f" # User
+	echo -n "%F{8}@%f" # at
+	echo -n "%F{12}%m%f" # Host
+	echo -n "%F{8}:%f" # in 
+	echo -n "%{$reset_color%}%~" # Dir
+	echo -n "$(aphrodite_get_current_branch)" # Git branch
+	echo -n "\n"
+	echo -n "$(aphrodite_get_welcome_symbol)%{$reset_color%} " # $ or #
+}
+
+export GREP_COLOR='1;31'
+
+PROMPT='$(aphrodite_get_prompt)'
