@@ -15,6 +15,12 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
 ZSH_THEME_GIT_PROMPT_DIRTY="%f%F{11}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
+isSsh(){
+    if [ "$SSH_CONNECTION" != "" ]; then
+        echo -n "%F{6}(ssh)%f"
+    fi
+}
+
 aphrodite_get_welcome_symbol() {
 
 	echo -n "%(?..%F{1})"
@@ -46,6 +52,7 @@ aphrodite_get_prompt() {
 	
 	echo -n "%F{6}%n%f" # User
 	echo -n "%F{8}@%f" # at
+        echo -n "$(isSsh)" # Git branch
 	echo -n "%F{12}%m%f" # Host
 	echo -n "%F{8}:%f" # in 
 	echo -n "%{$reset_color%}%~" # Dir
