@@ -97,15 +97,21 @@ fi
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     print_info "Installing oh-my-zsh"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    command -v zsh | sudo tee -a /etc/shells
     sudo chsh -s $(which zsh) $(whoami)
 else
-    print_success "oh-my-zsh already installed"
+    print_success "oh-my-zsh already installed, updating"
+    cd $HOME/.oh-my-zsh
+    git pull
+    cd -
 fi
 
 if ! [ -d "${DOTFILES_FOLDER}" ]; then
     print_info "Cloning dotfiles"
     git clone ${DOTFILES_REPO} ${DOTFILES_FOLDER}
+else
+    cd ${DOTFILES_FOLDER}
+    git pull
+    cd -
 fi
 
 print_info "Linking dotfiles"
