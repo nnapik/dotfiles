@@ -46,6 +46,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ervandew/supertab'
+Plugin 'rust-lang/rust.vim'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -302,9 +303,12 @@ nnoremap <Leader>. :w<CR>:e .<CR>
 "press enter
 nnoremap <Leader><CR> i<CR><Esc>
 
-"compile rust
-nnoremap <Leader>c :w<CR>:!cargo check<CR>
-nnoremap <Leader>r :w<CR>:!cargo run<CR>
+"mapping for rust
+augroup rust
+    autocmd!
+augroup END
+nnoremap <Leader>rc :w<CR>:!cargo check<CR>
+nnoremap <Leader>rr :w<CR>:!cargo run<CR>
 
 "}}}
 
