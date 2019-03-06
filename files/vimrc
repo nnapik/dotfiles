@@ -47,6 +47,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ervandew/supertab'
 Plugin 'rust-lang/rust.vim'
+Plugin 'PProvost/vim-ps1'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
