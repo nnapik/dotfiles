@@ -28,3 +28,5 @@ alias tn='t new-session -s'
 alias ezsh='exec zsh'
 
 alias sudo='sudo -E'
+
+alias dot='cd ~/.dotfiles'
