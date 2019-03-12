@@ -8,13 +8,12 @@ alias ..='cd ..'
 
 uu(){
     if [[ -z "$TMUX" ]]; then
-        tmux new -s apt 'sudo apt update && sudo apt upgrade && zsh'
+        tmux new -s apt 'sudo apt update && sudo apt upgrade; zsh'
     else
         sudo apt update && sudo apt upgrade
     fi
 }
-#alias uu="tmux new -s apt 'bash --init-file <(echo sudo apt update && sudo apt upgrade)'"
-alias ai='sudo apt install'
+alias ai="sudo apt update && sudo apt install"
 
 alias g='git'
 alias gc='g commit'
