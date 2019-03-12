@@ -6,7 +6,7 @@ alias mkdir='mkdir -pv'
 alias grep='grep --color=auto'
 alias ..='cd ..'
 
-alias uu='sudo apt update && sudo apt upgrade'
+alias uu="tmux new -s apt 'sudo apt update && sudo apt upgrade'"
 alias ai='sudo apt install'
 
 alias g='git'
@@ -30,3 +30,4 @@ alias ezsh='exec zsh'
 alias sudo='sudo -E'
 
 alias dot='cd ~/.dotfiles'
+alias proj='cd ~/Dropbox/projects/'
