@@ -61,6 +61,96 @@ filetype plugin indent on
 "{{{ "template"
 "
 "}}}
+"{{{ Mappings
+
+"{{{ Vanilla
+"change leader to ,
+:let mapleader = ","
+
+"jk to leav insert mode
+inoremap jk <Esc>
+
+" save and closes a file with a leader
+nnoremap <silent> <Leader>x :wq<CR>
+nnoremap <silent> <Leader>w :w<CR>
+nnoremap <silent> <Leader>q :q<CR>
+
+" Open Url on this line with the browser \w
+map <Leader>f :call Browser ()<CR>
+
+" Next Tab
+"nnoremap <silent> <C-h> :tabnext<CR>
+" Previous Tab
+"nnoremap <silent> <C-l> :tabprevious<CR>
+" New Tab
+"nnoremap <silent> <C-t> :tabnew<CR>
+nnoremap <silent> <C-J> <C-W><C-J>
+nnoremap <silent> <C-K> <C-W><C-K>
+nnoremap <silent> <C-L> <C-W><C-L>
+nnoremap <silent> <C-H> <C-W><C-H>
+nnoremap <silent> <C-,> :vertical resize -5<CR>
+nnoremap <silent> <C-.> :vertical resize +5<CR>
+nnoremap <silent> <C--> :resize -5<CR>
+nnoremap <silent> <C-+> :resize +5<CR>
+
+" Edit .vimrc
+"nnoremap <silent> <Leader>ev :tabnew<CR>:e $MYVIMRC<CR>
+nnoremap <silent> <Leader>ev :vsp $MYVIMRC<CR>
+
+"reload .vimrc
+nnoremap <silent> <Leader>sv :source $MYVIMRC<cr>
+
+" Up and down are more logical with g..
+nnoremap <silent> k gk
+nnoremap <silent> j gj
+"inoremap <silent> <Up> <Esc>gka
+"inoremap <silent> <Down> <Esc>gja
+
+"nnoremap <silent> <End> a <Esc>r
+
+" Create Blank Newlines and stay in Normal mode
+nnoremap <Leader>o o<Esc>
+nnoremap <Leader>O O<Esc>
+
+" Space will toggle folds!
+nnoremap <space> za
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+map N Nzz
+map n nzz
+
+" Testing
+set completeopt=longest,menuone,preview
+
+" Swap ; and :  Convenient.
+nnoremap ; :
+
+"autoindent paster code
+:nnoremap p p=`]
+
+"reindent whole file
+nnoremap <Leader>= gg=G''
+
+"save file and open current directory
+nnoremap <Leader>. :w<CR>:e .<CR>
+
+"press enter
+nnoremap <Leader><CR> i<CR><Esc>
+
+"mapping for rust
+augroup rust
+    autocmd!
+augroup END
+nnoremap <Leader>rc :w<CR>:!cargo check<CR>
+nnoremap <Leader>rr :w<CR>:!cargo run<CR>
+
+"}}}
+
+"{{{ NERDTree
+nnoremap <Leader>n :NERDTreeToggle<CR>
+"}}}
+"}}}
 "{{{ CtrlP
 "
 "}}}
@@ -68,24 +158,6 @@ filetype plugin indent on
 if g:os == 'Win'
     let g:ycm_server_python_interpreter = 'c:\Python27amd64\python.exe'
 endif
-"}}}
-"{{{ Easymotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
-"
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
-"
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
 "}}}
 "{{{ Syntastic
 set statusline+=%#warningmsg# 
@@ -246,95 +318,24 @@ augroup myvimrc
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif 
 augroup END
 "}}}
-"{{{ Mappings
+"{{{ Easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+map <Leader> <Plug>(easymotion-prefix)
 
-"{{{ Vanilla
-"change leader to ,
-:let mapleader = ","
-
-"jk to leav insert mode
-inoremap jk <Esc>
-
-" save and closes a file with a leader
-nnoremap <silent> <Leader>x :wq<CR>
-nnoremap <silent> <Leader>w :w<CR>
-nnoremap <silent> <Leader>q :q<CR>
-
-" Open Url on this line with the browser \w
-map <Leader>f :call Browser ()<CR>
-
-" Next Tab
-"nnoremap <silent> <C-h> :tabnext<CR>
-" Previous Tab
-"nnoremap <silent> <C-l> :tabprevious<CR>
-" New Tab
-"nnoremap <silent> <C-t> :tabnew<CR>
-nnoremap <silent> <C-J> <C-W><C-J>
-nnoremap <silent> <C-K> <C-W><C-K>
-nnoremap <silent> <C-L> <C-W><C-L>
-nnoremap <silent> <C-H> <C-W><C-H>
-nnoremap <silent> <C-,> :vertical resize -5<CR>
-nnoremap <silent> <C-.> :vertical resize +5<CR>
-nnoremap <silent> <C--> :resize -5<CR>
-nnoremap <silent> <C-+> :resize +5<CR>
-
-" Edit .vimrc
-"nnoremap <silent> <Leader>ev :tabnew<CR>:e $MYVIMRC<CR>
-nnoremap <silent> <Leader>ev :vsp $MYVIMRC<CR>
-
-"reload .vimrc
-nnoremap <silent> <Leader>sv :source $MYVIMRC<cr>
-
-" Up and down are more logical with g..
-nnoremap <silent> k gk
-nnoremap <silent> j gj
-"inoremap <silent> <Up> <Esc>gka
-"inoremap <silent> <Down> <Esc>gja
-
-"nnoremap <silent> <End> a <Esc>r
-
-" Create Blank Newlines and stay in Normal mode
-nnoremap <Leader>o o<Esc>
-nnoremap <Leader>O O<Esc>
-
-" Space will toggle folds!
-nnoremap <space> za
-
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-map N Nzz
-map n nzz
-
-" Testing
-set completeopt=longest,menuone,preview
-
-" Swap ; and :  Convenient.
-nnoremap ; :
-
-"autoindent paster code
-:nnoremap p p=`]
-
-"reindent whole file
-nnoremap <Leader>= gg=G''
-
-"save file and open current directory
-nnoremap <Leader>. :w<CR>:e .<CR>
-
-"press enter
-nnoremap <Leader><CR> i<CR><Esc>
-
-"mapping for rust
-augroup rust
-    autocmd!
-augroup END
-nnoremap <Leader>rc :w<CR>:!cargo check<CR>
-nnoremap <Leader>rr :w<CR>:!cargo run<CR>
-
-"}}}
-
-"{{{ NERDTree
-nnoremap <Leader>n :NERDTreeToggle<CR>
-"}}}
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+"
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+"
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 "}}}
 
 set noswapfile
