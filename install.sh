@@ -65,6 +65,9 @@ if [ "${OS}" = "Linux" ]; then
     if [ -f /etc/os-release ] && $(grep -iq "Debian" /etc/os-release); then
         DISTRO="Debian"
     fi
+    if [ -f /etc/os-release ] && $(grep -iq "Arch" /etc/os-release); then
+        DISTRO="Arch"
+    fi
 
     if $(grep -q "Microsoft" /proc/version); then
         IS_WSL=true
@@ -89,6 +92,11 @@ if [ "$OS" = "Linux" ] && [ "$DISTRO" = "Debian" ]; then
     sudo apt-get update
     sudo apt-get -y upgrade
     sudo apt-get -y install build-essential curl file git $APT_PACKAGES
+elif [ "$OS" = "Linux" ] && [ "$DISTRO" = "Arch" ]; then
+    print_info "Updating system packages"
+    sudo pacman -Syy
+    sudo pacman -Syu
+    sudo pacman -S build-essential curl file git $APT_PACKAGES
 else
     print_info "Skipping system package updates"
 fi
