@@ -8,11 +8,20 @@ alias ..='cd ..'
 
 uu(){
     if [[ -z "$TMUX" ]]; then
-        tmux new -s apt 'sudo apt update && sudo apt upgrade; zsh'
+        if [ "$OS" = "Linux" ] && [ "$DISTRO" = "Debian" ]; then
+            tmux new -s packageManager 'sudo apt update && sudo apt upgrade; zsh'
+        elif [ "$OS" = "Linux" ] && [ "$DISTRO" = "Arch" ]; then
+            tmux new -s packageManager 'sudo pacman -Syy && sudo pacman -Syu; zsh'
+        fi
     else
-        sudo apt update && sudo apt upgrade
+        if [ "$OS" = "Linux" ] && [ "$DISTRO" = "Debian" ]; then
+            sudo apt update && sudo apt upgrade
+        elif [ "$OS" = "Linux" ] && [ "$DISTRO" = "Arch" ]; then
+            sudo pacman -Syy && sudo pacman -Syu; zsh
+        fi
     fi
 }
+alias pi="sudo pacman -S"
 alias ai="sudo apt update && sudo apt install"
 
 alias g='git'

@@ -20,3 +20,19 @@ fi
 #fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+export OS=$(uname -s 2> /dev/null)
+if [ "${OS}" = "Linux" ]; then
+    export IS_WSL=false
+    # Check Debian vs. RHEL
+    if [ -f /etc/os-release ] && $(grep -iq "Debian" /etc/os-release); then
+        export DISTRO="Debian"
+    fi
+    if [ -f /etc/os-release ] && $(grep -iq "Arch" /etc/os-release); then
+        export DISTRO="Arch"
+    fi
+
+    if $(grep -q "Microsoft" /proc/version); then
+        IS_WSL=true
+    fi
+fi
