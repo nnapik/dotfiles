@@ -3,7 +3,7 @@
 # inspired by elithrar/dotfiles
 DOTFILES_REPO="https://github.com/nnapik/dotfiles"
 DOTFILES_FOLDER="$HOME/.dotfiles"
-APT_PACKAGES="git htop vim python python3 youtube-dl zsh ranger fonts-powerline"
+APT_PACKAGES="git htop vim python python3 youtube-dl zsh ranger curl file git "
 SSH_EMAIL="nnapik@gmail.com"
 
 # Colors 
@@ -91,12 +91,12 @@ if [ "$OS" = "Linux" ] && [ "$DISTRO" = "Debian" ]; then
     print_info "Updating system packages"
     sudo apt-get update
     sudo apt-get -y upgrade
-    sudo apt-get -y install build-essential curl file git $APT_PACKAGES
+    sudo apt-get -y install build-essential fonts-powerline $APT_PACKAGES
 elif [ "$OS" = "Linux" ] && [ "$DISTRO" = "Arch" ]; then
     print_info "Updating system packages"
     sudo pacman -Syy
     sudo pacman -Syu
-    sudo pacman -S build-essential curl file git $APT_PACKAGES
+    sudo pacman -S --confirm powerline-fonts $APT_PACKAGES
 else
     print_info "Skipping system package updates"
 fi
