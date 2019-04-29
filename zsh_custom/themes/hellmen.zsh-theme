@@ -53,7 +53,7 @@ aphrodite_get_prompt() {
 	echo -n "%F{6}%n%f" # User
 	echo -n "%F{8}@%f" # at
         echo -n "$(isSsh)" # Git branch
-	echo -n "%F{12}%m%f" # Host
+	echo -n "%F{4}%m%f" # Host
 	echo -n "%F{8}:%f" # in 
 	echo -n "%{$reset_color%}%~" # Dir
 	echo -n "$(aphrodite_get_current_branch)" # Git branch
