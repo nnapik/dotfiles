@@ -44,3 +44,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
     tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
 fi
+
+if [[ "$PWD" == "/mnt/c/Users/pnedoma" ]]; then
+    cd
+fi
