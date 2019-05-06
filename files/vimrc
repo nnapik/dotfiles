@@ -39,6 +39,7 @@ endif
 
 Plugin 'VundleVim/Vundle.vim'
 " Add plugins here:
+Plugin 'morhetz/gruvbox'
 Plugin 'fugitive.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
@@ -356,4 +357,4 @@ set background=dark
 "set directory=~\vimfiles\tmp
 set autoread "watch for file changes
 
-colorscheme desert
+colorscheme gruvbox

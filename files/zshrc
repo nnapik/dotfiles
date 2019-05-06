@@ -48,3 +48,5 @@ fi
 if [[ "$PWD" == "/mnt/c/Users/pnedoma" ]]; then
     cd
 fi
+
+source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
