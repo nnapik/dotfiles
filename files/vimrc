@@ -50,6 +50,7 @@ Plugin 'ervandew/supertab'
 Plugin 'rust-lang/rust.vim'
 Plugin 'PProvost/vim-ps1'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'yaml.vim'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -317,6 +318,10 @@ endfunction
 augroup myvimrc     
     au!     
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif 
+augroup END
+augroup yml
+    au!
+    au FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
 augroup END
 "}}}
 "{{{ Easymotion
