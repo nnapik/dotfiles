@@ -79,6 +79,7 @@ nnoremap <silent> <Leader>q :q<CR>
 
 " Open Url on this line with the browser \w
 map <Leader>f :call Browser ()<CR>
+map <Leader>t :call TodoListMode ()<CR>
 
 " Next Tab
 "nnoremap <silent> <C-h> :tabnext<CR>
@@ -302,12 +303,8 @@ endfunction
 "{{{ Todo List Mode
 
 function! TodoListMode()
-    e ~/.todo.otl
-    wincmd l
-    set foldlevel=1
-    tabnew ~/.notes.txt
-    tabfirst
-    " or 'norm! zMzr'
+    vsp ~/.todo.otl
+    vsp ~/.notes.txt
 endfunction
 
 "}}}
@@ -322,6 +319,10 @@ augroup END
 augroup yml
     au!
     au FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
+augroup END
+augroup myTmuxRc
+    au!
+    au BufWritePost .tmux.conf,tmux.conf silent !tmux source ~/.tmux.conf
 augroup END
 "}}}
 "{{{ Easymotion
