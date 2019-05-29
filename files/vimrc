@@ -51,6 +51,8 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'PProvost/vim-ps1'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'yaml.vim'
+Plugin 'jiangmiao/auto-pairs'
+
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -147,6 +149,12 @@ augroup rust
 augroup END
 nnoremap <Leader>rc :w<CR>:!cargo check<CR>
 nnoremap <Leader>rr :w<CR>:!cargo run<CR>
+
+"replace the word under cursor
+nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
+
+"Insert mode remaps
+
 
 "}}}
 
