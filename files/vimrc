@@ -154,7 +154,7 @@ nnoremap <Leader>rr :w<CR>:!cargo run<CR>
 nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
 
 "Insert mode remaps
-
+nmap =j :%!python -m json.tool<CR>
 
 "}}}
 
