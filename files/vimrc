@@ -135,10 +135,6 @@ nnoremap <silent> <Leader>sv :source $MYVIMRC<cr>
 " Up and down are more logical with g..
 nnoremap <silent> k gk
 nnoremap <silent> j gj
-"inoremap <silent> <Up> <Esc>gka
-"inoremap <silent> <Down> <Esc>gja
-
-"nnoremap <silent> <End> a <Esc>r
 
 " Create Blank Newlines and stay in Normal mode
 nnoremap <Leader>o o<Esc>
@@ -180,17 +176,40 @@ nnoremap <Leader>rr :w<CR>:!cargo run<CR>
 "replace the word under cursor
 nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
 
-"Insert mode remaps
-nmap =j :%!python -m json.tool<CR>
+"indent json file
+nnoremap =j :%!python -m json.tool<CR>
+
+"comments
+"nnoremap <C-k> ^i"<ESC>
+"nnoremap <C-j> ^x
+
+" Commenting blocks of code.
+
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
+"Insert mode remaps 
+inoremap <ESC> <NOP>
+
 
 "}}}
 
 "{{{ NERDTree
 nnoremap <Leader>n :NERDTreeToggle<CR>
+let NERDTreeMapUpdirKeepOpen='u'
+let NERDTreeMapUpdir='U'
+let NERDTreeMapChangeRoot='<CR>'
 "}}}
 "}}}
 "{{{ CtrlP
-"
+
+let g:ctrlp_map = '<C-P>'
+let g:ctrlp_cmd = 'CtrlPBuffer'
+let g:ctrlp_custom_ignore = {
+            \ 'dir': '\v[\/](\.(git|hg|svn|vscode)|\_site|bin|obj)$',
+            \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+            \}
+
 "}}}
 "{{{ You complete me <3
 if g:os == 'Win'
@@ -198,9 +217,9 @@ if g:os == 'Win'
 endif
 "}}}
 "{{{ Syntastic
-set statusline+=%#warningmsg# 
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*  
+"set statusline+=%#warningmsg# 
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*  
 let g:syntastic_always_populate_loc_list = 1 
 let g:syntastic_auto_loc_list = 1 
 let g:syntastic_check_on_open = 1 
@@ -210,7 +229,6 @@ let g:syntastic_check_on_wq = 0
 autocmd StdinReadPre * let s:std_in=1
 
 "Start nerdtree when no files were specified
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "Start nerdtree when opening a directory
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
@@ -233,10 +251,11 @@ if g:os == 'Win'
 else
     set cul
 endif
+set cul
 
 "copy/paste winlike
-source $VIMRUNTIME/mswin.vim
-behave mswin
+" source $VIMRUNTIME/mswin.vim
+" behave mswin
 
 " This shows what you are typing as a command.  I love this!
 set showcmd
@@ -260,6 +279,7 @@ set smarttab
 " Who wants an 8 character tab?  Not me!
 set shiftwidth=4
 set softtabstop=4
+set shiftround
 
 " Real men use gcc
 "compiler gcc
@@ -283,9 +303,6 @@ set ignorecase
 " And so is Artificial Intellegence!
 set smartcase
 
-" This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
-"inoremap jj <Esc>
-
 " Incremental searching is sexy
 set incsearch
 
@@ -301,7 +318,7 @@ nnoremap <silent> <CR> :noh<CR><CR>
 let @/ = ""
 
 " When I close a tab, remove the buffer
-set nohidden
+"set nohidden
 
 " Set off the other paren
 highlight MatchParen ctermbg=4
@@ -335,6 +352,21 @@ endfunction
 
 "}}}
 
+"{{{ move windows
+
+function! WinMove(key)
+  let t:curwin = winnr()
+  exec "wincmd ".a:key
+  if (t:curwin == winnr())
+    if (match(a:key,'[jk]'))
+      wincmd v
+    else
+      wincmd s
+    endif
+    exec "wincmd ".a:key
+  endif
+endfunction
+"}}}
 "{{{ Todo List Mode
 
 function! TodoListMode()
@@ -345,20 +377,56 @@ endfunction
 "}}}
 
 "}}}
+
+"{{{ IABBR's
+""}}}
 "{{{ Autocommands
 "reload vim when saving .vimrc
+"
 augroup myvimrc     
     au!     
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif 
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc if exists("$MYVIMRC") | so $MYVIMRC | endif | if has('gui_running') && exists("$MYGVIMRC") | so $MYGVIMRC | endif | if has('gui_running') | simalt ~x | endif
+    au FileType vim :iabbrev <buffer> aug augroup <---><CR>au!<CR>augroup END<CR>jk?<---><CR>C
+    au FileType vim let b:comment_leader = '" '
 augroup END
-augroup yml
+
+augroup auto_indent
     au!
-    au FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
+    au BufWritePre *.cs,*.csproj,*.sln,*.xml,*.config :normal gg=G
 augroup END
+
+augroup yml_json
+    au!
+    au FileType *.yaml,*.yml,*.json setlocal ts=2 sts=2 sw=2 expandtab
+augroup END
+
 augroup myTmuxRc
     au!
     au BufWritePost .tmux.conf,tmux.conf silent !tmux source ~/.tmux.conf
 augroup END
+
+augroup guiEnter
+    au!
+    au GUIEnter * simalt ~x
+augroup END
+
+augroup c_languages
+    au!
+    au FileType *.c,*.cs,*.cpp,*.java,*.scala let b:comment_leader = '// '
+augroup END
+
+augroup java_languages
+    au!
+    au FileType *.java,*.scala let b:comment_leader = '// '
+augroup END
+
+augroup python_language
+    au!
+    au FileType python             let b:comment_leader = '# '
+augroup END
+
+au FileType sh,ruby                let b:comment_leader = '# '
+au FileType conf,fstab             let b:comment_leader = '# '
 "}}}
 "{{{ Easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -399,3 +467,5 @@ set background=dark
 set autoread "watch for file changes
 
 colorscheme gruvbox
+set nowrap
+
