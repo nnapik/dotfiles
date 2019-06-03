@@ -6,6 +6,11 @@ if !exists('g:os')
     endif
 endif
 
+let hostname = substitute(system('hostname'), '\n', '', '')
+if hostname == 'PNedoma2249'
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree d:\repos | endif
+endif
+
 "{{{ Vundle
 filetype off
 let iCanHazVundle=1
