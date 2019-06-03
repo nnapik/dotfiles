@@ -57,6 +57,7 @@ Plugin 'PProvost/vim-ps1'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'yaml.vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'kshenoy/vim-signature'
 
 
 if iCanHazVundle == 0
@@ -69,6 +70,13 @@ filetype plugin indent on
 "}}}
 "{{{ "template"
 "
+"}}}
+"{{{ Airline
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
 "}}}
 "{{{ Mappings
 
