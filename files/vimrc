@@ -43,6 +43,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'fugitive.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
@@ -50,6 +51,7 @@ Plugin 'ervandew/supertab'
 Plugin 'rust-lang/rust.vim'
 Plugin 'PProvost/vim-ps1'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'kien/rainbow_parentheses.vim'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -338,6 +340,15 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 "}}}
+"{{{ "RainbowParentheses"
+augroup rainbowParentheses
+    au!
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
+augroup END
+"}}}
 
 set noswapfile
 set guifont=Lucida_Console:h11
@@ -358,3 +369,7 @@ set background=dark
 set autoread "watch for file changes
 
 colorscheme gruvbox
+"let g:airline_theme='minimalist'
+
+let g:airline_highlighting_cache = 1
+let g:airline_focuslost_inactive = 0
