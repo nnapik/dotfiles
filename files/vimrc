@@ -154,8 +154,8 @@ nnoremap <space> za
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
-map N Nzz
-map n nzz
+map N Nzzzv
+map n nzzzv
 
 " Testing
 set completeopt=longest,menuone,preview
