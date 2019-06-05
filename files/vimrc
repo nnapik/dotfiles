@@ -195,9 +195,9 @@ noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<C
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 "remap space tab to find next marker
-inoremap <S-space> <ESC>/<++><CR>"_c4l
-vnoremap <S-space> <ESC>/<++><CR>"_c4l
-noremap <S-space> <ESC>/<++><CR>"_c4l
+" inoremap <S-space> <ESC>/<++><CR>"_c4l
+" vnoremap <S-space> <ESC>/<++><CR>"_c4l
+" noremap <S-space> <ESC>/<++><CR>"_c4l
 
 "}}}
 
@@ -267,7 +267,7 @@ set previewheight=5
 "set backupdir=~\vimfiles\backup
 "set directory=~\vimfiles\tmp
 set autoread "watch for file changes
-set nowrap
+set wrap
 
 "use system clipboard as unnamed register
 set clipboard=unnamed
@@ -360,8 +360,8 @@ if has("multi_byte")
 endif
 set encoding=utf-8
 
-set splitbelow
 set splitright
+set splitbelow
 set winheight=30
 set winminheight=5
 
