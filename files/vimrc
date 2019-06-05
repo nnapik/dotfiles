@@ -418,6 +418,11 @@ augroup END
 "{{{ Autocommands
 "reload vim when saving .vimrc
 "
+augroup fileTypes
+    au!
+    au BufNewFile,BufRead *.otl setfiletype text
+augroup END
+
 augroup BuffWrite
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc if exists("$MYVIMRC") | so $MYVIMRC | endif | if has('gui_running') && exists("$MYGVIMRC") | so $MYGVIMRC | endif | if has('gui_running') | simalt ~x | endif
@@ -440,6 +445,17 @@ augroup comment
     au FileType python                 let b:comment_leader = '# '
     au FileType sh,ruby                let b:comment_leader = '# '
     au FileType conf,fstab             let b:comment_leader = '# '
+augroup END
+
+augroup quickfix
+    au!
+    au QuickFixCmdPost [^l]* cwindow
+    au QuickFixCmdPost l* lwindow
+augroup END
+
+augroup text_files
+    au!
+    au FileType markdown,text setlocal spell spelllang=en_us
 augroup END
 
 "}}}
