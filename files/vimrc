@@ -184,6 +184,8 @@ nnoremap <Leader>rr :w<CR>:!cargo run<CR>
 
 "replace the word under cursor
 nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
+nnoremap <leader>g :lv //gj %<left><left><left><left><left>
+nnoremap <leader>r :%s///g<left><left><left>
 
 "indent json file
 nnoremap =j :%!python -m json.tool<CR>
