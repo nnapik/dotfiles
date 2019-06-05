@@ -118,9 +118,8 @@ nnoremap <silent> <Leader>td :tabclose<CR>
 "mappings for buffers
 nnoremap <silent> <Leader>bn :enew<CR>
 nnoremap <silent> <Leader>bl :bnext<CR>
-nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <Leader><Tab> :bnext<CR>
 nnoremap <silent> <Leader>bh :bprev<CR>
-nnoremap <silent> <S-Tab> :bprev<CR>
 
 "move to the split in the direction shown, or create a new split
 nnoremap <silent> <C-h> :call WinMove('h')<cr>
