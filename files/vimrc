@@ -1,3 +1,4 @@
+au!
 if !exists('g:os')
     if has('win32') || has ('win16')
         let g:os = 'Win'
@@ -99,8 +100,8 @@ nnoremap <silent> <Leader>w :w<CR>
 nnoremap <silent> <Leader>q :bd<CR>
 
 " Open Url on this line with the browser \w
-map <Leader>f :call Browser ()<CR>
-map <Leader>t :call TodoListMode ()<CR>
+nnoremap <Leader>f :call Browser ()<CR>
+nnoremap <Leader>t :call TodoListMode ()<CR>
 
 
 "mappings for tabs
@@ -112,7 +113,9 @@ nnoremap <silent> <Leader>td :tabclose<CR>
 "mappings for buffers
 nnoremap <silent> <Leader>bn :enew<CR>
 nnoremap <silent> <Leader>bl :bnext<CR>
+nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <Leader>bh :bprev<CR>
+nnoremap <silent> <S-Tab> :bprev<CR>
 
 "move to the split in the direction shown, or create a new split
 nnoremap <silent> <C-h> :call WinMove('h')<cr>
@@ -155,7 +158,7 @@ set completeopt=longest,menuone,preview
 nnoremap ; :
 
 "autoindent paster code
-:nnoremap p p=`]
+nnoremap p p=`]
 
 "reindent whole file
 nnoremap <Leader>= gg=G''
@@ -179,18 +182,14 @@ nnoremap <leader>* :%s/\<<c-r><c-w>\>//g<left><left>
 "indent json file
 nnoremap =j :%!python -m json.tool<CR>
 
-"comments
-"nnoremap <C-k> ^i"<ESC>
-"nnoremap <C-j> ^x
-
 " Commenting blocks of code.
-
 noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
-"Insert mode remaps 
-inoremap <ESC> <NOP>
-
+"remap space tab to find next marker
+inoremap <S-space> <ESC>/<++><CR>"_c4l
+vnoremap <S-space> <ESC>/<++><CR>"_c4l
+noremap <S-space> <ESC>/<++><CR>"_c4l
 
 "}}}
 
@@ -217,12 +216,12 @@ if g:os == 'Win'
 endif
 "}}}
 "{{{ Syntastic
-"set statusline+=%#warningmsg# 
+"set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*  
-let g:syntastic_always_populate_loc_list = 1 
-let g:syntastic_auto_loc_list = 1 
-let g:syntastic_check_on_open = 1 
+"set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "}}}
 "{{{ NERDTree
@@ -379,54 +378,45 @@ endfunction
 "}}}
 
 "{{{ IABBR's
+augroup abbr
+    au!
+" vim
+    au FileType vim :iabbrev <buffer> ife if<++><CR><++><CR>else<CR><++><CR>endif<ESC>kkkk^<S-Space>
+    au FileType vim :iabbrev <buffer> iff if<++><CR><++><CR>endif<CR><ESC>kkk^<S-Space>
+    au FileType vim :iabbrev <buffer> aug augroup<++><CR>au!<CR><++><CR>augroup END<CR><ESC>kkkk^<S-Space>
+" c
+    au FileType c,cs,cpp,java,scala :iabbrev <buffer> ife if (<++>){<CR><++>}<CR>else {<CR><++>}<CR><ESC>kkkk^<S-Space><BS>
+    au FileType c,cs,cpp,java,scala :iabbrev <buffer> iff if (<++>){<CR><++>}<CR><ESC>kk^<S-Space><BS>
+augroup END
+
 ""}}}
 "{{{ Autocommands
 "reload vim when saving .vimrc
 "
-augroup myvimrc     
-    au!     
+augroup BuffWrite
+    au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc if exists("$MYVIMRC") | so $MYVIMRC | endif | if has('gui_running') && exists("$MYGVIMRC") | so $MYGVIMRC | endif | if has('gui_running') | simalt ~x | endif
-    au FileType vim :iabbrev <buffer> aug augroup <---><CR>au!<CR>augroup END<CR>jk?<---><CR>C
-    au FileType vim let b:comment_leader = '" '
-augroup END
-
-augroup auto_indent
-    au!
-    au BufWritePre *.cs,*.csproj,*.sln,*.xml,*.config :normal gg=G
-augroup END
-
-augroup yml_json
-    au!
-    au FileType *.yaml,*.yml,*.json setlocal ts=2 sts=2 sw=2 expandtab
-augroup END
-
-augroup myTmuxRc
-    au!
     au BufWritePost .tmux.conf,tmux.conf silent !tmux source ~/.tmux.conf
+    au BufWritePre cs,csproj,sln,xml,config :normal gg=G
+    au BufWritePre * %s/\s\+$//e
 augroup END
 
 augroup guiEnter
     au!
+    au FileType *.yaml,*.yml,*.json setlocal ts=2 sts=2 sw=2 expandtab
     au GUIEnter * simalt ~x
 augroup END
 
-augroup c_languages
+augroup comment
     au!
-    au FileType *.c,*.cs,*.cpp,*.java,*.scala let b:comment_leader = '// '
+    au FileType vim                    let b:comment_leader = '" '
+    au FileType c,cs,cpp               let b:comment_leader = '// '
+    au FileType java,scala             let b:comment_leader = '// '
+    au FileType python                 let b:comment_leader = '# '
+    au FileType sh,ruby                let b:comment_leader = '# '
+    au FileType conf,fstab             let b:comment_leader = '# '
 augroup END
 
-augroup java_languages
-    au!
-    au FileType *.java,*.scala let b:comment_leader = '// '
-augroup END
-
-augroup python_language
-    au!
-    au FileType python             let b:comment_leader = '# '
-augroup END
-
-au FileType sh,ruby                let b:comment_leader = '# '
-au FileType conf,fstab             let b:comment_leader = '# '
 "}}}
 "{{{ Easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -434,11 +424,11 @@ map <Leader> <Plug>(easymotion-prefix)
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
+nmap f <Plug>(easymotion-overwin-f)
 " or
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
+nmap f <Plug>(easymotion-overwin-f2)
 "
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
