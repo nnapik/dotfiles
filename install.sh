@@ -113,11 +113,22 @@ else
     cd -
 fi
 
+
 if ! [ -d "${DOTFILES_FOLDER}" ]; then
     print_info "Cloning dotfiles"
     git clone ${DOTFILES_REPO} ${DOTFILES_FOLDER}
 else
     cd ${DOTFILES_FOLDER}
+    git pull
+    cd -
+fi
+
+if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    print_info "Downloading tpm for TMUX"
+    mkdir -pv "$HOME/.tmux/plugins"
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+else
+    cd "$HOME/.tmux/plugins/tpm"
     git pull
     cd -
 fi

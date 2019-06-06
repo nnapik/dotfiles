@@ -48,3 +48,12 @@ alias dot='cd ~/.dotfiles'
 alias proj='cd ~/Dropbox/projects/'
 
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias docker="sudo docker"
+
+alias vle="sudo vim /opt/appdata/letsencrypt/config"
+alias rle="docker restart letsencrypt"
+
+alias vup="vim /home/petr/Dropbox/DockerCompose/docker-compose.yml"
+alias rup="/home/petr/Dropbox/DockerCompose/up.sh"
+
+
