@@ -55,13 +55,17 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ervandew/supertab'
-Plugin 'rust-lang/rust.vim'
 Plugin 'PProvost/vim-ps1'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'yaml.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kshenoy/vim-signature'
+
+" Language plugins
+Plugin 'rust-lang/rust.vim'
+Plugin 'yaml.vim'
+Plugin 'omnisharp-vim'
+
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -224,6 +228,44 @@ if g:os == 'Win'
     let g:ycm_server_python_interpreter = 'c:\Python27amd64\python.exe'
 endif
 "}}}
+"{{{ OMNISHARP
+let g:OmniSharp_server_stdio = 1
+let g:OmniSharp_start_server = 0
+
+augroup omnisharp
+    au!
+    " Show type information automatically when the cursor stops moving
+    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+    autocmd FileType cs nnoremap <buffer> <Leader>ss :OmniSharpStartServer .<CR>
+    autocmd FileType cs nnoremap <buffer> <Leader>sp :OmniSharpStopServer<CR>
+
+    " The following commands are contextual, based on the cursor position.
+    autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
+    autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+    autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
+    autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
+
+    " Finds members in the current buffer
+    autocmd FileType cs nnoremap <buffer> <Leader>fm :OmniSharpFindMembers<CR>
+
+    autocmd FileType cs nnoremap <buffer> <Leader>fx :OmniSharpFixUsings<CR>
+    autocmd FileType cs nnoremap <buffer> <Leader>tt :OmniSharpTypeLookup<CR>
+    autocmd FileType cs nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
+    autocmd FileType cs nnoremap <buffer> <C-\> :OmniSharpSignatureHelp<CR>
+    autocmd FileType cs inoremap <buffer> <C-\> <C-o>:OmniSharpSignatureHelp<CR>
+
+    " Find all code errors/warnings for the current solution and populate the quickfix window
+    autocmd FileType cs nnoremap <buffer> <Leader>cc :OmniSharpGlobalCodeCheck<CR>
+
+    " Contextual code actions (uses fzf, CtrlP or unite.vim when available)
+    nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
+    " Run code actions with text selected in visual mode to extract method
+    xnoremap <Leader><Space> :call OmniSharp#GetCodeActions('visual')<CR>
+
+augroup END
+
+
+"}}}
 "{{{ Syntastic
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -232,6 +274,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_cs_checkers = ['code_checker']
 "}}}
 "{{{ NERDTree
 autocmd StdinReadPre * let s:std_in=1
