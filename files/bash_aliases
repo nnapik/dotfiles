@@ -56,4 +56,5 @@ alias rle="docker restart letsencrypt"
 alias vup="vim /home/petr/Dropbox/DockerCompose/docker-compose.yml"
 alias rup="/home/petr/Dropbox/DockerCompose/up.sh"
 
+randpw(){ < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-60};echo;}
 
