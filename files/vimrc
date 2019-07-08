@@ -478,7 +478,7 @@ augroup END
 
 augroup guiEnter
     au!
-    au FileType *.yaml,*.yml,*.json setlocal ts=2 sts=2 sw=2 expandtab
+    au FileType yaml,json setlocal ts=2 sts=2 sw=2 expandtab
     au GUIEnter * simalt ~x
 augroup END
 
