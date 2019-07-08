@@ -15,11 +15,17 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.secrets ]; then
+    . ~/.secrets
+fi
+
 #if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
     #tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
 #fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:/snap/bin"
+export PATH="$PATH:$HOME/go/bin"
 
 export OS=$(uname -s 2> /dev/null)
 if [ "${OS}" = "Linux" ]; then
