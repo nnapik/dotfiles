@@ -60,6 +60,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kshenoy/vim-signature'
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Language plugins
 Plugin 'rust-lang/rust.vim'
@@ -127,10 +128,10 @@ nnoremap <silent> <Leader><Tab> :bnext<CR>
 nnoremap <silent> <Leader>bh :bprev<CR>
 
 "move to the split in the direction shown, or create a new split
-nnoremap <silent> <C-h> :call WinMove('h')<cr>
-nnoremap <silent> <C-j> :call WinMove('j')<cr>
-nnoremap <silent> <C-k> :call WinMove('k')<cr>
-nnoremap <silent> <C-l> :call WinMove('l')<cr>
+" nnoremap <silent> <C-h> :call WinMove('h')<cr>
+" nnoremap <silent> <C-j> :call WinMove('j')<cr>
+" nnoremap <silent> <C-k> :call WinMove('k')<cr>
+" nnoremap <silent> <C-l> :call WinMove('l')<cr>
 
 "resize windows
 nnoremap <silent> <C-Left> :vertical resize -5<CR>
