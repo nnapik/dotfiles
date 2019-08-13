@@ -67,6 +67,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'yaml.vim'
 Plugin 'omnisharp-vim'
 
+Plugin 'Solarized'
 
 if iCanHazVundle == 0
     echo "Installing Vundles, please ignore key map error messages"
@@ -536,6 +537,6 @@ augroup END
 
 
 set guifont=Lucida_Console:h11
-colorscheme gruvbox
 set background=dark
+colorscheme gruvbox
 
