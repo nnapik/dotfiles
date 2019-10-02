@@ -414,6 +414,18 @@ set winminheight=5
 
 " }}}
 "{{{ Functions
+"{{{ JSON->c# object and back
+"
+function! JsonToC ()
+    "bool
+    %s/^\s*"\(.*\)": \=\(true\|false\),\=\s*$/public bool \1 { get; set; }/ig
+    "string
+    %s/^\s*"\(.*\)": \=".*",\=\s*$/public string \1 { get; set; }/ig
+    "int
+    %s/^\s*"\(.*\)": \=\d*,\=\s*$/public int \1 { get; set; }/ig
+endfunction
+"}}}
+
 "{{{ Open URL in browser
 
 function! Browser ()
