@@ -61,6 +61,7 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kshenoy/vim-signature'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'mileszs/ack.vim'
 
 " Language plugins
 Plugin 'rust-lang/rust.vim'
@@ -224,6 +225,13 @@ let g:ctrlp_custom_ignore = {
             \}
 
 "}}}
+"{{{ ACK
+if (executable('ag'))
+    let g:ackprg = 'ag --vimgrep'
+endif
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+"}}}"
 "{{{ You complete me <3
 if g:os == 'Win'
     let g:ycm_server_python_interpreter = 'c:\Python27amd64\python.exe'
