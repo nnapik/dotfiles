@@ -61,6 +61,7 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kshenoy/vim-signature'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'roxma/vim-tmux-clipboard'
 Plugin 'mileszs/ack.vim'
 
 " Language plugins
