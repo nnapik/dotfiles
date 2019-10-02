@@ -424,6 +424,13 @@ function! JsonToC ()
     "int
     %s/^\s*"\(.*\)": \=\d*,\=\s*$/public int \1 { get; set; }/ig
 endfunction
+
+function! CToJson()
+    %s/^\s*public int \(.*\) \={ \=get; \=set; \=}\s*/"\1": 0,
+    %s/^\s*public bool \(.*\) \={ \=get; \=set; \=}\s*/"\1": false,
+    %s/^\s*public string \(.*\) \={ \=get; \=set; \=}\s*/"\1": "",
+endfunction
+
 "}}}
 
 "{{{ Open URL in browser
