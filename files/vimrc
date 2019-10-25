@@ -459,6 +459,8 @@ augroup abbr
 " c
     au FileType c,cs,cpp,java,scala :iabbrev <buffer> ife if (<++>){<CR><++>}<CR>else {<CR><++>}<CR><ESC>kkkk^<S-Space><BS>
     au FileType c,cs,cpp,java,scala :iabbrev <buffer> iff if (<++>){<CR><++>}<CR><ESC>kk^<S-Space><BS>
+    "rust
+    au FileType rust :iabbrev <buffer> pln println!("");<ESC>hhi
 augroup END
 
 ""}}}
