@@ -67,7 +67,7 @@ Plugin 'mileszs/ack.vim'
 " Language plugins
 Plugin 'rust-lang/rust.vim'
 Plugin 'yaml.vim'
-Plugin 'omnisharp-vim'
+Plugin 'omnisharp/omnisharp-vim'
 
 Plugin 'Solarized'
 
