@@ -156,7 +156,7 @@ nnoremap <silent> j gj
 nnoremap <Leader>o o<Esc>
 nnoremap <Leader>O O<Esc>
 
-nnoremap <Leader>; mqA;<ESC>`q
+nnoremap <Leader>; mqA;<ESC>`qmq
 
 " Space will toggle folds!
 nnoremap <space> za
