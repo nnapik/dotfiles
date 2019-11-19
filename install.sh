@@ -3,7 +3,7 @@
 # inspired by elithrar/dotfiles
 DOTFILES_REPO="https://github.com/nnapik/dotfiles"
 DOTFILES_FOLDER="$HOME/.dotfiles"
-APT_PACKAGES="git htop vim python python3 youtube-dl zsh ranger curl file git "
+APT_PACKAGES="git htop vim python python3 zsh ranger curl file git "
 SSH_EMAIL="nnapik@gmail.com"
 
 # Colors 
