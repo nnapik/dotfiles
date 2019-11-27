@@ -9,13 +9,13 @@ alias ..='cd ..'
 uu(){
     if [[ -z "$TMUX" ]]; then
         if [ "$OS" = "Linux" ] && [ "$DISTRO" = "Debian" ]; then
-            tmux new -s packageManager 'sudo apt update && sudo apt upgrade; zsh'
+            tmux new -s packageManager 'sudo apt update && sudo apt upgrade && sudo apt autoremove; zsh'
         elif [ "$OS" = "Linux" ] && [ "$DISTRO" = "Arch" ]; then
             tmux new -s packageManager 'sudo pacman -Syy && sudo pacman -Syu; zsh'
         fi
     else
         if [ "$OS" = "Linux" ] && [ "$DISTRO" = "Debian" ]; then
-            sudo apt update && sudo apt upgrade
+            sudo apt update && sudo apt upgrade && sudo apt autoremove
         elif [ "$OS" = "Linux" ] && [ "$DISTRO" = "Arch" ]; then
             sudo pacman -Syy && sudo pacman -Syu; zsh
         fi
