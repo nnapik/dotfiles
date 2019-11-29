@@ -27,6 +27,9 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:/snap/bin"
 export PATH="$PATH:$HOME/go/bin"
 
+#DWM settings for JAVA apps
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 export OS=$(uname -s 2> /dev/null)
 if [ "${OS}" = "Linux" ]; then
     export IS_WSL=false
