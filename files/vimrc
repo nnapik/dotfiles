@@ -175,9 +175,6 @@ set completeopt=longest,menuone,preview
 " Swap ; and :  Convenient.
 nnoremap ; :
 
-"autoindent paster code
-nnoremap p p=`]
-
 "reindent whole file
 nnoremap <Leader>= gg=G''
 
