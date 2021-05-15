@@ -13,70 +13,73 @@ if hostname == 'PNedoma2249'
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && g:os == 'Win' | NERDTree d:\repos | endif
 endif
 "}}}
-"{{{ Vundle
+"{{{ vim-plug
 filetype off
-let iCanHazVundle=1
+let iCanHazPlug=1
 if g:os == 'Win'
-    "{{{ Vundle install win
-    let vundle_readme=expand('$HOME/vimfiles/bundle/Vundle.vim/README.md')
-    if !filereadable(vundle_readme)
-        echo "Installing Vundle.."
-        echo ""
-        silent !mkdir -p $HOME/vimfiles/bundle
-        silent !git clone https://github.com/VundleVim/Vundle.vim $HOME/vimfiles/bundle/Vundle.vim
-        let iCanHazVundle=0
+    "{{{ vim-plug Plug win
+    let plug_file=expand('$HOME/vimfiles/autoload/plug.vim')
+    if !filereadable(plug_file)
+        echo "Installing vim-plug.."
+        echo "... not supported on win yet"
+        let iCanHazPlug=0
     endif
     "}}}
-    set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
-    call vundle#begin('$HOME/vimfiles/bundle/')
 else
-    "{{{ Vundle install ux
-    let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-    if !filereadable(vundle_readme)
-        echo "Installing Vundle.."
+    "{{{ vim-plug install ux
+    let plug_file=expand('$HOME/.vim/autoload/plug.vim')
+    if !filereadable(plug_file)
+        echo "Installing vim-plug.."
         echo ""
-        silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
-        let iCanHazVundle=0
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        let iCanHazPlug=0
     endif
     "}}}
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
 endif
 
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 " Add plugins here:
-Plugin 'morhetz/gruvbox'
-Plugin 'fugitive.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
-Plugin 'ervandew/supertab'
-Plugin 'PProvost/vim-ps1'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'kshenoy/vim-signature'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'roxma/vim-tmux-clipboard'
-Plugin 'mileszs/ack.vim'
+Plug 'morhetz/gruvbox'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/syntastic'
+Plug 'kien/ctrlp.vim'
+Plug 'ervandew/supertab'
+Plug 'PProvost/vim-ps1'
+Plug 'easymotion/vim-easymotion'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kshenoy/vim-signature'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'mileszs/ack.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = [
+            \'coc-json',
+            \'coc-git',
+            \'coc-pyright',
+            \'coc-rust-analyzer',
+            \'coc-rls',
+            \'coc-sh',
+            \'coc-clangd',
+            \'coc-docker'
+            \]
+Plug 'christianrondeau/vim-base64'
 
 " Language plugins
-Plugin 'rust-lang/rust.vim'
-Plugin 'yaml.vim'
-Plugin 'omnisharp/omnisharp-vim'
+Plug 'rust-lang/rust.vim', {'for':'rust'}
+Plug 'omnisharp/omnisharp-vim'
+Plug 'yaroot/wowlua.vim'
 
-Plugin 'Solarized'
+call plug#end()
 
-if iCanHazVundle == 0
-    echo "Installing Vundles, please ignore key map error messages"
+if iCanHazPlug == 0
+    echo "Installing Plugins, please ignore key map error messages"
     echo ""
-    :PluginInstall
+    :PlugInstall
 endif
-call vundle#end()
 filetype plugin indent on
 "}}}
 "{{{ Airline
