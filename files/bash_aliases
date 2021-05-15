@@ -56,5 +56,34 @@ alias rle="docker restart letsencrypt"
 alias vup="vim /home/petr/Dropbox/DockerCompose/docker-compose.yml"
 alias rup="/home/petr/Dropbox/DockerCompose/up.sh"
 
+alias k=kubectl
+alias d=docker
+
+alias kgp="kubectl get pods"
+
+kdiff(){
+    vim -d $1 ../../oddjob-api/templates/$1
+}
+
+kgrep(){
+    kubectl get pod -l app=$1 | awk 'NR > 1 {print $1}' | head -n 1
+}
+
+klog(){
+    kubectl logs $(kgrep "$1")
+}
+
+klogf(){
+    kubectl logs -f $(kgrep "$1")
+}
+
+kbash(){
+    kubectl exec -it $(kgrep $1) bash
+}
+
+ksh(){
+    kubectl exec -it $(kgrep $1) sh
+}
+
 randpw(){ < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-60};echo;}
 

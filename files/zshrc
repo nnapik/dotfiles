@@ -50,3 +50,11 @@ if [[ "$PWD" == "/mnt/c/Users/pnedoma" ]]; then
 fi
 
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+source /Users/pnedoma/.iterm2_shell_integration.zsh
+source /Users/pnedoma/.config/kube.config
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
